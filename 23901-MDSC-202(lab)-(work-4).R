@@ -1,20 +1,20 @@
 # Reading Data from CSV
-dataset <- read.csv("E://R///apple_quality.csv")
+data <- read.csv("E://R///apple_quality.csv")
 
 # Dropping unnecessary columns
-dataset <- dataset[, !colnames(dataset) %in% c('A_id')]
+data <- data[, !colnames(data) %in% c('A_id')]
 
 # Convert categorical variable to numeric
-dataset$Quality <- as.numeric(factor(dataset$Quality, levels = c("bad", "good")))
+data$Quality <- as.numeric(factor(data$Quality, levels = c("bad", "good")))
 
 # Calculate mean vector
-mean_vector <- colMeans(dataset)
+mean_vector <- colMeans(data)
 
 # Calculate covariance matrix
-cov_matrix <- matrix(NA, nrow = ncol(dataset), ncol = ncol(dataset))
-for (i in 1:ncol(dataset)) {
-  for (j in 1:ncol(dataset)) {
-    cov_matrix[i, j] <- sum((dataset[, i] - mean_vector[i]) * (dataset[, j] - mean_vector[j])) / (nrow(dataset) - 1)
+cov_matrix <- matrix(NA, nrow = ncol(data), ncol = ncol(data))
+for (i in 1:ncol(data)) {
+  for (j in 1:ncol(data)) {
+    cov_matrix[i, j] <- sum((data[, i] - mean_vector[i]) * (data[, j] - mean_vector[j])) / (nrow(data) - 1)
   }
 }
 
